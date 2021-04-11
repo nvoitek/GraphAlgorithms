@@ -2,16 +2,13 @@ from graph import graph
 
 def bfs(graph):
     # all vertices are not vistied at the start
-    vertices = graph.getVertices()
+    visited = [False] * len(graph.graph)
 
     # using queue because we will take elements from the front while adding to the back
     queue = []
 
-    # visited nodes will be marked in the dictionary
-    visited = dict.fromkeys(vertices, False)
-
     # pick the source node to start with
-    source = next(iter(vertices))
+    source = next(iter(graph.graph[0]))
 
     # mark the source node as visited and enqueue it
     visited[source] = True
@@ -26,21 +23,17 @@ def bfs(graph):
         # then take all adjacent elements that weren't visited
         # mark them as visited and add them to the back
         # this way we are looking at the shallow elements first
-        for i in graph.getNeighbours(source):
+        for i in graph.graph[source]:
             if not visited[i]:
                 visited[i] = True
                 queue.append(i)
 
-graph_elements = { "a" : ["b","c","d","e"],
-                "b" : ["a", "f", "g"],
-                "c" : ["a", "h"],
-                "d" : ["a"],
-                "e" : ["a"],
-                "f" : ["b"],
-                "g" : ["b"],
-                "h" : ["c"]
-                }
-
-g = graph(graph_elements)
+g = graph()
+g.addEdge(0, 1)
+g.addEdge(0, 2)
+g.addEdge(1, 2)
+g.addEdge(2, 0)
+g.addEdge(2, 3)
+g.addEdge(3, 3)
 
 bfs(g)
