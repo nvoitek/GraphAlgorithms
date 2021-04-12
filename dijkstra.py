@@ -52,6 +52,5 @@ graph_elements = { "a" : {"b" : 4, "c" : 2, "d" : 3, "e" : 1, "f" : 1},
                 }
                 
 g = graph(graph_elements)
-source = next(iter(g.getVertices()))
 result = dijkstra(g, "a", "g")
 print('shortest path={}'.format(result))
